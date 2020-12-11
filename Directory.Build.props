@@ -1,0 +1,6 @@
+<Project>
+  <!-- https://stackoverflow.com/a/59522983/234132  -->
+ <PropertyGroup>
+   <Nullable>enable</Nullable>
+ </PropertyGroup>
+</Project>
