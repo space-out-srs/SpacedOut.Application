@@ -10,7 +10,7 @@ namespace SpacedOut.Infrastucture.Domain.Cards
 {
     internal class CardCreatedNotification : BaseOutboxMessageHandler, ICardCreatedNotification
     {
-        public CardCreatedNotification(IDateService dateService, IRepository repository) : base(dateService, repository)
+        public CardCreatedNotification(IRepository repository) : base(repository)
         {
         }
 

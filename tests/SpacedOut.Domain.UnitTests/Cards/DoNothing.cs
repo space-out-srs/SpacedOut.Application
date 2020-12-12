@@ -5,7 +5,7 @@ namespace SpacedOut.Domain.UnitTests.Cards
     public class DoNothing
     {
         [Fact]
-        public void ShouldDoNothing()
+        public void DoesNothing()
         {
             var card = new CardBuilder()
                 .WithDefaultValues()

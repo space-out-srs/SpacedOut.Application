@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SpacedOut.Infrastucture.Data;
-using SpacedOut.SharedKernal.Interfaces;
+using SpacedOut.SharedKernel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -41,28 +41,29 @@ namespace SpacedOut.Infrastucture.Processing.Outbox
             // https://stackoverflow.com/a/53809870/234132
             using (var scope = _serviceProvider.CreateScope())
             {
-                var dateService = scope.ServiceProvider.GetRequiredService<IDateService>();
                 var dbContext = GetDbContext(scope);
-
-                OutboxMessage? nextInQueue;
-                while ((nextInQueue = GetNextInQueue(dateService, dbContext)) != null)
+                if (dbContext != null)
                 {
-                    try
+                    OutboxMessage? nextInQueue;
+                    while ((nextInQueue = GetNextInQueue(dbContext)) != null)
                     {
-                        var handler = GetHandler(scope, nextInQueue.Key);
+                        try
+                        {
+                            var handler = GetHandler(scope, nextInQueue.Key);
 
-                        if (handler == null) throw new InvalidOperationException($"'{nextInQueue.Key}' outbox hander not found");
+                            if (handler == null) throw new InvalidOperationException($"'{nextInQueue.Key}' outbox hander not found");
 
-                        handler.Process(nextInQueue.Data);
+                            handler.Process(nextInQueue.Data);
 
-                        nextInQueue.MarkProcessed(dateService);
+                            nextInQueue.MarkProcessed();
+                        }
+                        catch
+                        {
+                            nextInQueue.MarkFailed();
+                        }
+
+                        dbContext.SaveChanges();
                     }
-                    catch
-                    {
-                        nextInQueue.MarkFailed(dateService);
-                    }
-
-                    dbContext.SaveChanges();
                 }
             }
 
@@ -83,16 +84,16 @@ namespace SpacedOut.Infrastucture.Processing.Outbox
             _timer?.Dispose();
         }
 
-        private static AppDbContext GetDbContext(IServiceScope scope)
+        private static AppDbContext? GetDbContext(IServiceScope scope)
         {
             return scope
                 .ServiceProvider
-                .GetRequiredService<AppDbContext>();
+                .GetService<AppDbContext>();
         }
 
-        private static OutboxMessage? GetNextInQueue(IDateService dateService, AppDbContext dbContext)
+        private static OutboxMessage? GetNextInQueue(AppDbContext dbContext)
         {
-            var cutoff = dateService.GetUtcNow();
+            var cutoff = SystemTime.UtcNow();
 
             return dbContext
                 .OutboxMessages

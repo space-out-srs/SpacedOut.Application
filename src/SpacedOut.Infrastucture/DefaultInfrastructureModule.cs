@@ -72,7 +72,6 @@ namespace SpacedOut.Infrastucture.Infrastructure
 
         private void RegisterCommonDependencies(IServiceCollection services)
         {
-            services.AddScoped<IDateService, DateService>();
             services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
             services.AddScoped<IRepository, EfRepository>();
             services.AddScoped<IUnitOfWorkFactory, EfTransactionFactory>();
