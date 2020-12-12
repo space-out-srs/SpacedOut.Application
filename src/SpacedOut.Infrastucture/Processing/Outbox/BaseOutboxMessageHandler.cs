@@ -1,5 +1,4 @@
 ﻿using SpacedOut.SharedKernal.Interfaces;
-using SpacedOut.SharedKernel;
 using System;
 using System.Threading.Tasks;
 
@@ -7,10 +6,12 @@ namespace SpacedOut.Infrastucture.Processing.Outbox
 {
     internal abstract class BaseOutboxMessageHandler
     {
+        private readonly IDateService _dateService;
         private readonly IRepository _repository;
 
-        public BaseOutboxMessageHandler(IRepository repository)
+        public BaseOutboxMessageHandler(IDateService dateService, IRepository repository)
         {
+            _dateService = dateService;
             _repository = repository;
         }
 
@@ -20,9 +21,10 @@ namespace SpacedOut.Infrastucture.Processing.Outbox
         public async Task Queue(string data, DateTime? processOnUtc = null)
         {
             var outboxMessage = new OutboxMessage(
+                _dateService,
                 Key,
                 data,
-                processOnUtc ?? SystemTime.UtcNow()
+                processOnUtc ?? _dateService.GetUtcNow()
             );
 
             await _repository.AddAsync(outboxMessage);
