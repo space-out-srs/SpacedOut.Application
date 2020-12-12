@@ -19,7 +19,7 @@ namespace SpacedOut.UnitTests.Cards
         }
 
 
-        // This is no longer needed because warnings are errors
+        // This is no longer needed because `nullable` is enabled and warnings are errors
         //[Fact]
         //public async Task ThrowsExceptionGivenNullEventArgument()
         //{
