@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using SpacedOut.Infrastucture.Data;
 using System;
 
-namespace SpaceOut.Api
+namespace SpacedOut.Api
 {
     public class Program
     {

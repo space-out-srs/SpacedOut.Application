@@ -1,7 +1,7 @@
 ﻿using SpacedOut.Domain.Cards;
 using SpacedOut.Domain.Schedules;
 
-namespace SpaceOut.UnitTests.Cards
+namespace SpacedOut.UnitTests.Cards
 {
     // https://ardalis.com/improve-tests-with-the-builder-pattern-for-test-data
     public class CardBuilder

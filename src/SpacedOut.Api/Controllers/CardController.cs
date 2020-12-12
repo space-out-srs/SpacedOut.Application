@@ -2,12 +2,12 @@
 using SpacedOut.Domain.Cards;
 using SpacedOut.Domain.Schedules;
 using SpacedOut.SharedKernal.Interfaces;
-using SpaceOut.Api.ViewModels;
+using SpacedOut.Api.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SpaceOut.Api.Controllers
+namespace SpacedOut.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]

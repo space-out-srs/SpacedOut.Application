@@ -6,7 +6,7 @@ using SpacedOut.Infrastucture.Data;
 using System;
 using System.Linq;
 
-namespace SpaceOut.Api
+namespace SpacedOut.Api
 {
     public static class SeedData
     {

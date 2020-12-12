@@ -3,7 +3,7 @@ using SpacedOut.Domain.Cards;
 using SpacedOut.Domain.Schedules;
 using System.Text.Json.Serialization;
 
-namespace SpaceOut.Api.ViewModels
+namespace SpacedOut.Api.ViewModels
 {
     public class CardModel
     {

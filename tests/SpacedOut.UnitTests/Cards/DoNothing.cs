@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace SpaceOut.UnitTests.Cards
+namespace SpacedOut.UnitTests.Cards
 {
     public class DoNothing
     {

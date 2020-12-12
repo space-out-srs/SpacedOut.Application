@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceOut.Api", "src\SpaceOut.Api\SpaceOut.Api.csproj", "{1AB89B6E-3611-44C0-B534-5529FA4AC25C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpacedOut.Api", "src\SpacedOut.Api\SpacedOut.Api.csproj", "{1AB89B6E-3611-44C0-B534-5529FA4AC25C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpacedOut.Domain", "src\SpacedOut.Domain\SpacedOut.Domain.csproj", "{A263FABC-FAF5-4E79-97B7-0658A55B9FD7}"
 EndProject
@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5E41C535-D0A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{348EAA7A-F115-4253-B712-384097A387DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceOut.UnitTests", "tests\SpaceOut.UnitTests\SpaceOut.UnitTests.csproj", "{BBF72A4C-A532-4317-9595-908F0BAA3DA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpacedOut.UnitTests", "tests\SpacedOut.UnitTests\SpacedOut.UnitTests.csproj", "{BBF72A4C-A532-4317-9595-908F0BAA3DA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

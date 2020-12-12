@@ -8,7 +8,7 @@ using Microsoft.OpenApi.Models;
 using SpacedOut.Infrastucture;
 using SpacedOut.Infrastucture.Infrastructure;
 
-namespace SpaceOut.Api
+namespace SpacedOut.Api
 {
     public class Startup
     {
@@ -33,7 +33,7 @@ namespace SpaceOut.Api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SpaceOut.Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SpacedOut.Api", Version = "v1" });
             });
 
             var connectionString = _configuration.GetConnectionString("Default");
@@ -51,7 +51,7 @@ namespace SpaceOut.Api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SpaceOut.Api v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SpacedOut.Api v1"));
             }
 
             app.UseHttpsRedirection();

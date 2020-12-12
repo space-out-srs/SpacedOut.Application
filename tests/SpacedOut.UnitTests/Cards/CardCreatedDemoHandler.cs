@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Xunit;
 using D = SpacedOut.Domain.Cards.Handlers;
 
-namespace SpaceOut.UnitTests.Cards
+namespace SpacedOut.UnitTests.Cards
 {
     public class CardCreatedDemoHandler
     {

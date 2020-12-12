@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace SpaceOut.Api.Controllers
+namespace SpacedOut.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
