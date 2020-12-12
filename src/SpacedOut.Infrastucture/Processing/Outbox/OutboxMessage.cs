@@ -1,4 +1,5 @@
-﻿using SpacedOut.SharedKernel;
+﻿using SpacedOut.SharedKernal.Interfaces;
+using SpacedOut.SharedKernel;
 using System;
 
 namespace SpacedOut.Infrastucture.Processing.Outbox
@@ -13,24 +14,24 @@ namespace SpacedOut.Infrastucture.Processing.Outbox
         public string Data { get; private set; } = null!;
 
         private OutboxMessage() { }
-        public OutboxMessage(string type, string key, DateTime processOnUtc)
+        public OutboxMessage(IDateService dateService, string type, string key, DateTime processOnUtc)
         {
-            OccurredOnUtc = SystemTime.UtcNow();
+            OccurredOnUtc = dateService.GetUtcNow();
             ProcessOnUtc = processOnUtc;
             Key = type;
             Data = key;
         }
 
-        public void MarkProcessed()
+        public void MarkProcessed(IDateService dateService)
         {
-            ProcessedOnUtc = SystemTime.UtcNow();
+            ProcessedOnUtc = dateService.GetUtcNow();
         }
 
-        public void MarkFailed()
+        public void MarkFailed(IDateService dateService)
         {
             FailedAttempts += 1;
-            ProcessOnUtc = SystemTime
-                .UtcNow()
+            ProcessOnUtc = dateService
+                .GetUtcNow()
                 .AddHours(1);
         }
     }

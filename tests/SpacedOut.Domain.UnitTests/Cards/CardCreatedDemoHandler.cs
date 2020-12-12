@@ -10,7 +10,7 @@ namespace SpacedOut.Domain.UnitTests.Cards
     public class CardCreatedDemoHandler
     {
         private readonly D.CardCreatedDemoHandler _handler;
-        private Mock<ICardCreatedNotification> _notificationMock;
+        private readonly Mock<ICardCreatedNotification> _notificationMock;
 
         public CardCreatedDemoHandler()
         {
@@ -18,16 +18,15 @@ namespace SpacedOut.Domain.UnitTests.Cards
             _handler = new D.CardCreatedDemoHandler(_notificationMock.Object);
         }
 
-
         // This is no longer needed because `nullable` is enabled and warnings are errors
         //[Fact]
-        //public async Task ThrowsExceptionGivenNullEventArgument()
+        //public async Task ShouldThrowArgumentNullException()
         //{
         //    Exception ex = await Assert.ThrowsAsync<ArgumentNullException>(() => _handler.Handle(null));
         //}
 
         [Fact]
-        public async Task TriggerNotificationGivenEventInstance()
+        public async Task ShouldTriggerNotificationOnce()
         {
             var card = new CardBuilder()
                 .WithDefaultValues()

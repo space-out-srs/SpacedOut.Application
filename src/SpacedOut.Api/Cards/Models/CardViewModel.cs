@@ -3,18 +3,18 @@ using SpacedOut.Domain.Cards;
 using SpacedOut.Domain.Schedules;
 using System.Text.Json.Serialization;
 
-namespace SpacedOut.Api.ViewModels
+namespace SpacedOut.Api.Cards.Models
 {
-    public class CardModel
+    public class CardViewModel
     {
         public int Id { get; init; }
 
         [JsonConverter(typeof(SmartEnumValueConverter<ScheduleEnum, string>))]
         public ScheduleEnum? Schedule { get; init; }
 
-        public static CardModel FromCard(Card card)
+        public static CardViewModel FromCard(Card card)
         {
-            return new CardModel()
+            return new CardViewModel()
             {
                 Id = card.Id,
                 Schedule = card.Schedule
