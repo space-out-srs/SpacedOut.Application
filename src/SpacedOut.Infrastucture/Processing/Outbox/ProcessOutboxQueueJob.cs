@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SpacedOut.Infrastucture.Data;
-using SpacedOut.SharedKernal.Interfaces;
+using SpacedOut.SharedKernel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -41,11 +41,10 @@ namespace SpacedOut.Infrastucture.Processing.Outbox
             // https://stackoverflow.com/a/53809870/234132
             using (var scope = _serviceProvider.CreateScope())
             {
-                var dateService = scope.ServiceProvider.GetRequiredService<IDateService>();
                 var dbContext = GetDbContext(scope);
 
                 OutboxMessage? nextInQueue;
-                while ((nextInQueue = GetNextInQueue(dateService, dbContext)) != null)
+                while ((nextInQueue = GetNextInQueue(dbContext)) != null)
                 {
                     try
                     {
@@ -55,11 +54,11 @@ namespace SpacedOut.Infrastucture.Processing.Outbox
 
                         handler.Process(nextInQueue.Data);
 
-                        nextInQueue.MarkProcessed(dateService);
+                        nextInQueue.MarkProcessed();
                     }
                     catch
                     {
-                        nextInQueue.MarkFailed(dateService);
+                        nextInQueue.MarkFailed();
                     }
 
                     dbContext.SaveChanges();
@@ -90,9 +89,9 @@ namespace SpacedOut.Infrastucture.Processing.Outbox
                 .GetRequiredService<AppDbContext>();
         }
 
-        private static OutboxMessage? GetNextInQueue(IDateService dateService, AppDbContext dbContext)
+        private static OutboxMessage? GetNextInQueue(AppDbContext dbContext)
         {
-            var cutoff = dateService.GetUtcNow();
+            var cutoff = SystemTime.UtcNow();
 
             return dbContext
                 .OutboxMessages
