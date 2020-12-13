@@ -22,7 +22,7 @@ namespace SpacedOut.Infrastucture.Processing.Outbox
             var outboxMessage = new OutboxMessage(
                 Key,
                 data,
-                processOnUtc ?? SystemTime.UtcNow()
+                processOnUtc ?? SystemTime.UtcNow
             );
 
             await _repository.AddAsync(outboxMessage);

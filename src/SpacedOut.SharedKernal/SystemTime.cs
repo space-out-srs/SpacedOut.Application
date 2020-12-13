@@ -7,26 +7,29 @@ namespace SpacedOut.SharedKernel
         [ThreadStatic]
         private static DateTime? _dateTimeUtc;
 
-        public static DateTime UtcNow()
+        public static DateTime UtcNow
         {
-            if (_dateTimeUtc.HasValue)
+            get
             {
-                return _dateTimeUtc.Value;
-            }
+                if (_dateTimeUtc.HasValue)
+                {
+                    return _dateTimeUtc.Value;
+                }
 
-            return DateTime.UtcNow;
+                return DateTime.UtcNow;
+            }
         }
 
-        public static IDisposable LockSystemTime(DateTime dateTimeUtc)
+        public static IDisposable UseSpecificDateTimeUtc(DateTime dateTimeUtc)
         {
             if (_dateTimeUtc.HasValue) throw new InvalidOperationException("SystemTime is already locked");
 
             _dateTimeUtc = dateTimeUtc;
 
-            return new LockedDateTime();
+            return new LockedDateTimeUtc();
         }
 
-        private class LockedDateTime : IDisposable
+        private class LockedDateTimeUtc : IDisposable
         {
             public void Dispose()
             {

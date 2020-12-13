@@ -15,7 +15,7 @@ namespace SpacedOut.Infrastucture.Processing.Outbox
         private OutboxMessage() { }
         public OutboxMessage(string type, string key, DateTime processOnUtc)
         {
-            OccurredOnUtc = SystemTime.UtcNow();
+            OccurredOnUtc = SystemTime.UtcNow;
             ProcessOnUtc = processOnUtc;
             Key = type;
             Data = key;
@@ -23,14 +23,14 @@ namespace SpacedOut.Infrastucture.Processing.Outbox
 
         public void MarkProcessed()
         {
-            ProcessedOnUtc = SystemTime.UtcNow();
+            ProcessedOnUtc = SystemTime.UtcNow;
         }
 
         public void MarkFailed()
         {
             FailedAttempts += 1;
             ProcessOnUtc = SystemTime
-                .UtcNow()
+                .UtcNow
                 .AddHours(1);
         }
     }

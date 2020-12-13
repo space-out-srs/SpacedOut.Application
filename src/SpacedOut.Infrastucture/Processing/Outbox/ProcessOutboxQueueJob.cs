@@ -91,7 +91,7 @@ namespace SpacedOut.Infrastucture.Processing.Outbox
 
         private static OutboxMessage? GetNextInQueue(AppDbContext dbContext)
         {
-            var cutoff = SystemTime.UtcNow();
+            var cutoff = SystemTime.UtcNow;
 
             return dbContext
                 .OutboxMessages
