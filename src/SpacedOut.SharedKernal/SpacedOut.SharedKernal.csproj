@@ -8,4 +8,8 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="SharpTime" Version="1.0.0.2" />
+  </ItemGroup>
+
 </Project>

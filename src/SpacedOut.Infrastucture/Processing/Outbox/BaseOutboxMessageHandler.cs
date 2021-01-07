@@ -1,5 +1,4 @@
 ﻿using SpacedOut.SharedKernal.Interfaces;
-using SpacedOut.SharedKernel;
 using System;
 using System.Threading.Tasks;
 
@@ -22,7 +21,7 @@ namespace SpacedOut.Infrastucture.Processing.Outbox
             var outboxMessage = new OutboxMessage(
                 Key,
                 data,
-                processOnUtc ?? SystemTime.UtcNow
+                processOnUtc ?? SharpTime.UtcNow
             );
 
             await _repository.AddAsync(outboxMessage);
